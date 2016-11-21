@@ -1,5 +1,9 @@
+import java.util.*;
+
 public class Sistema {
 	
+	private ArrayList<Usuario> Usuarios = new ArrayList<Usuario>();
+
 	public static void main (String[] args) {
 		adminLoggin();
 	}
