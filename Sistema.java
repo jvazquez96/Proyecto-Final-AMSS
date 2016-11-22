@@ -4,39 +4,18 @@ import java.io.IOException;
 public class Sistema {
 	
 	private static  ArrayList<Usuario> Usuarios = new ArrayList<Usuario>();
-	private static ReadFile file = new ReadFile("archivo.txt");
+	private static ControladorSistema ContrSistema = new ControladorSistema();	
+	
 	public static void main (String[] args) {
-		adminLoggin();
-		/*
+		adminLoggin();		
 		try {
-			readFile();
-		} catch (IOException e) {	
-			System.out.println(e.getMessage());
-		}*/
-	}
-	
-	private static void readFile() throws IOException {
-		String file_name = "archivo.txt";
-		try {	
-			String[] aryLines = file.OpenFile();
-		
-			for (int i = 0; i < aryLines.length; ++i) {
-				System.out.println(aryLines[i]);
-			}
+			System.out.println("Reading file......");
+			ContrSistema.readFile();	
 		} catch (IOException e) {
-			System.out.println( e.getMessage() );
-		}		
-	}
-
-	private static void writeFile(String Phrase) throws IOException {
-		String file_name = "archivo.txt";
-		try {
-			file.WriteFile(Phrase);
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage());	
 		}
-	
 	}
+	
 	
 	private static void adminLoggin() {
 		System.out.println("Usuario");
@@ -85,14 +64,8 @@ public class Sistema {
 		String contraseña = System.console().readLine();
 		System.out.println("¿Qué tipo de usuario es usted? Primario(1)/Secundario(2)");
 		String tipo = System.console().readLine();
-		Usuario usuarioNuevo = new Usuario(nombre,edad,correo,contraseña,tipo);
-		Usuarios.add(usuarioNuevo);
+		Usuario nuevoUsuario = ContrSistema.registro(nombre,edad,correo,contraseña,tipo);
+		Usuarios.add(nuevoUsuario);
 		System.out.println("Tamaño de lista: " + Usuarios.size());
-		Usuario prueba = Usuarios.get(0);
-		try {
-			writeFile(nombre + " " + edad + " " + correo + " " + contraseña + " " + tipo);
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
 	}
 }
