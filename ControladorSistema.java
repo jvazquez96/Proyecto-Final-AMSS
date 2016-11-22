@@ -31,8 +31,9 @@ public class ControladorSistema {
 		Usuario nuevoUsuario = new Usuario(nombre,edad,correo,contraseña,tipo);
 		if (!this.usuarioExistente(nuevoUsuario)){
 			writeFile(nombre + " " + edad + " " + correo + " " + contraseña + " " + tipo+"\n");
+			return nuevoUsuario;
 		} 
-		return nuevoUsuario;
+		return null;
 	}
 
 	public ArrayList<Usuario> getUsuarios() {
@@ -58,7 +59,32 @@ public class ControladorSistema {
 		}
 		return listOfUsers;
 	}	
-
+	
+	public Usuario getUsuario(String Usuario, String Contraseña) {
+		String nombre, correo, contraseña, tipo;
+		int edad;
+		String [] data = this.readFile();
+		String [] splittedString;
+		for (int i = 0; i < data.length; ++i) {
+			Usuario nuevo = new Usuario();
+			splittedString = data[i].split(" ");
+			nombre = splittedString[0];
+			edad = Integer.parseInt(splittedString[1]);
+			correo = splittedString[2];
+			contraseña = splittedString[3];	
+			tipo = splittedString[4];
+			nuevo.setNombre(nombre);
+			nuevo.setEdad(edad);
+			nuevo.setCorreoElectronico(correo);
+			nuevo.setContraseña(contraseña);
+			nuevo.setTipo(tipo);
+			if (Usuario.equals(correo) && Contraseña.equals(contraseña)) {
+				return nuevo;
+			}	
+		}
+		return null;	
+	}
+	
 	public boolean usuarioExistente(Usuario usuario) {
 		String correoElectronico = usuario.getCorreoElectronico();
 		String contraseña = usuario.getContraseña();
