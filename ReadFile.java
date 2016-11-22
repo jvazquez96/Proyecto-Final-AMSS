@@ -1,17 +1,20 @@
 import java.io.IOException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 
 public class ReadFile {
 
-	private String path;
-	
+	private File file;	
+
 	public ReadFile(String file_path) {
-		path = file_path;
+		file = new File(file_path);
 	}
 
 	public String[] OpenFile() throws IOException {
-		FileReader fr = new FileReader(path);
+		FileReader fr = new FileReader(file.getAbsoluteFile());
 		BufferedReader textReader = new BufferedReader (fr);
 		
 		int numberOfLines = readLines();
@@ -26,7 +29,7 @@ public class ReadFile {
 		
 	private int readLines() throws IOException {
 		
-		FileReader file_to_read = new FileReader(path);
+		FileReader file_to_read = new FileReader(file.getAbsoluteFile());
 		BufferedReader bf = new BufferedReader(file_to_read);		
 	
 		String aLine;
@@ -38,5 +41,16 @@ public class ReadFile {
 		bf.close();
 		
 		return numberOfLines;
+	}
+	
+        public void WriteFile(String Word) throws IOException {
+		try { 
+			FileWriter fr = new FileWriter(file.getAbsoluteFile(),true);
+			BufferedWriter bw = new BufferedWriter(fr);
+			bw.write(Word);
+			bw.close();		
+		} catch (IOException e) {
+			System.out.println(e);
+		}
 	}
 }

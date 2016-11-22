@@ -1,13 +1,17 @@
 import java.util.*;
 import java.io.IOException;
 
-
 public class Sistema {
 	
 	private ArrayList<Usuario> Usuarios = new ArrayList<Usuario>();
-
+	private static ReadFile file = new ReadFile("archivo.txt");
 	public static void main (String[] args) {
 		//adminLoggin();
+		try {
+			writeFile("Test\n");
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 		try {
 			readFile();
 		} catch (IOException e) {
@@ -18,7 +22,7 @@ public class Sistema {
 	private static void readFile() throws IOException {
 		String file_name = "archivo.txt";
 		try {	
-			ReadFile file = new ReadFile(file_name);
+			//ReadFile file = new ReadFile(file_name);
 			String[] aryLines = file.OpenFile();
 		
 			for (int i = 0; i < aryLines.length; ++i) {
@@ -27,6 +31,17 @@ public class Sistema {
 		} catch (IOException e) {
 			System.out.println( e.getMessage() );
 		}		
+	}
+
+	private static void writeFile(String Phrase) throws IOException {
+		String file_name = "archivo.txt";
+		try {
+			//ReadFile file = new ReadFile(file_name);
+			file.WriteFile(Phrase);
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+	
 	}
 	
 	private static void adminLoggin() {
