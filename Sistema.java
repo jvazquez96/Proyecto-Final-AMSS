@@ -44,17 +44,23 @@ public class Sistema {
 				System.out.println("Empezando registro..");
 				registro();
 			} else {
-				System.out.println("Autentificación de usuario falló :(");
+				System.out.println("Autentificación de usuario falló :( Si deseas salir escribe la letra E ");
 				System.out.println("Usuario");
 				usuario = System.console().readLine();
+				if (usuario.equals("E")) {
+					System.exit(0);
+				}
 				System.out.println("Contraseña");
 				contraseña = System.console().readLine();
 				usuarioCheck.setCorreoElectronico(usuario);
 				usuarioCheck.setContraseña(contraseña);
 				while (!verify(usuarioCheck)) {
-					System.out.println("Autentificación de usuario falló :(");
+					System.out.println("Autentificación de usuario falló :( Si deseas salir escribe la letra E");
 					System.out.println("Usuario");
 					usuario = System.console().readLine();
+					if (usuario.equals("E")) {
+						System.exit(0);
+					}
 					System.out.println("Contraseña");
 					contraseña = System.console().readLine();
 					usuarioCheck.setCorreoElectronico(usuario);
