@@ -24,7 +24,11 @@ public class Sistema {
 			System.out.println("Introduce el numero de la opción");
 			System.out.println("1. Dar de alta un curso");
 			System.out.println("2. Dar de alta una vacante");
+			System.out.println("3. Log-out");
 			String input = System.console().readLine();
+			if (input.equals("3")) {
+				adminLoggin();
+			}
 		}
 	}		
 	
