@@ -16,23 +16,23 @@ public class ControladorSistema {
 			System.out.println(e.getMessage());
 		}
 		return null;
-	}	
-	
+	}
+
 	private void writeFile(String Phrase) {
 		try {
 			this.file.WriteFile(Phrase);
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-	}		
+	}
 
-	
+
 	public Usuario registro(String nombre, int edad, String correo, String contraseña, String tipo) {
 		Usuario nuevoUsuario = new Usuario(nombre,edad,correo,contraseña,tipo);
 		if (!this.usuarioExistente(nuevoUsuario)){
 			writeFile(nombre + " " + edad + " " + correo + " " + contraseña + " " + tipo+"\n");
 			return nuevoUsuario;
-		} 
+		}
 		return null;
 	}
 
@@ -48,7 +48,7 @@ public class ControladorSistema {
 			nombre = splittedString[0];
 			edad = Integer.parseInt(splittedString[1]);
 			correo = splittedString[2];
-			contraseña = splittedString[3];	
+			contraseña = splittedString[3];
 			tipo = splittedString[4];
 			nuevo.setNombre(nombre);
 			nuevo.setEdad(edad);
@@ -58,8 +58,8 @@ public class ControladorSistema {
 			listOfUsers.add(nuevo);
 		}
 		return listOfUsers;
-	}	
-	
+	}
+
 	public Usuario getUsuario(String Usuario, String Contraseña) {
 		String nombre, correo, contraseña, tipo;
 		int edad;
@@ -71,7 +71,7 @@ public class ControladorSistema {
 			nombre = splittedString[0];
 			edad = Integer.parseInt(splittedString[1]);
 			correo = splittedString[2];
-			contraseña = splittedString[3];	
+			contraseña = splittedString[3];
 			tipo = splittedString[4];
 			nuevo.setNombre(nombre);
 			nuevo.setEdad(edad);
@@ -80,11 +80,11 @@ public class ControladorSistema {
 			nuevo.setTipo(tipo);
 			if (Usuario.equals(correo) && Contraseña.equals(contraseña)) {
 				return nuevo;
-			}	
+			}
 		}
-		return null;	
+		return null;
 	}
-	
+
 	public boolean usuarioExistente(Usuario usuario) {
 		String correoElectronico = usuario.getCorreoElectronico();
 		String contraseña = usuario.getContraseña();
@@ -106,7 +106,26 @@ public class ControladorSistema {
 		}
 		return false;
 	}
-	
-	
+	///////////////////////////////////////////////////
+	public boolean verificarCurso(String nombre, ArrayList<Curso> Cursos) {
+		for(int x=0;x<Cursos.size();x++) {
+			if (nombre.equals(Cursos.get(x).getNombre())){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean verificarVacante(String descripcion, ArrayList<Vacante> Vacantes) {
+		for(int x=0;x<Vacantes.size();x++) {
+			if (descripcion.equals(Vacantes.get(x).getDescripcion())){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/////////////////////////////////////////////////////
+
 
 }
