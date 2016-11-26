@@ -6,10 +6,8 @@ public class Sistema {
     private static  ArrayList<Usuario> Usuarios = new ArrayList<Usuario>();
     private static ControladorSistema ContrSistema = new ControladorSistema();
     private static Usuario mainUsuario = new Usuario();
-    ////////////////
     private static ArrayList<Curso> Cursos= new ArrayList<Curso>();
     private static ArrayList<Vacante> Vacantes= new ArrayList<Vacante>();
-    ///////////////////
     public static void main (String[] args) {
       mainUsuario = new Usuario("admin", 20, "admin@admin.com", "admin", "2");
         readUsers();
@@ -28,16 +26,37 @@ public class Sistema {
             System.out.println("Introduce el numero de la opción");
             System.out.println("1. Dar de alta un curso");
             System.out.println("2. Dar de alta una vacante");
-            System.out.println("3. Log-out");
+	    System.out.println("4. Ver cursos");
+            System.out.println("5. Log-out");
             String input = System.console().readLine();
             if (input.equals("1")) {
                 darAltaCurso();
             } else if (input.equals("2")) {
                 darAltaVacante();
-            } else if (input.equals("3")) {
+            } else if (input.equals("5")) {
                 adminLoggin();
-            }
+            } else if (input.equals("4")) {
+	   	showCursos(); 
+	   }
         }
+    }
+
+    private static void showCursos() {
+    	for (int i = 0; i < Cursos.size(); ++i) {
+		Curso curso = new Curso();
+		curso = Cursos.get(i);
+		System.out.println("Nombre: " + curso.getNombre());		
+	}
+	showMenu();
+    }
+
+    private static void showVacantes() {
+    	for (int i = 0; i < Vacantes.size(); ++i) {
+		Vacante vacante = new Vacante();
+		vacante = Vacantes.get(i);
+		System.out.println("Nombre: " + vacante.getNombre());
+	}
+	showMenu();	
     }
 
     private static void getMainUsuario(String Correo, String Contraseña) {
@@ -99,6 +118,7 @@ public class Sistema {
                 }
                 System.out.println("User logged in");
                 getMainUsuario(usuario,contraseña);
+		showMenu();
             }
         }
     }
@@ -130,7 +150,7 @@ public class Sistema {
         }
     }
 
-    ///////////////////////////////////////
+   
 
     private static void darAltaCurso() {
         String nombre;
@@ -152,7 +172,7 @@ public class Sistema {
         }else{
             System.out.println("¿Cuál es el año en el que se llevará acabo el curso?");
             int ano =Integer.parseInt(System.console().readLine());
-            System.out.println("¿Cuál es el mes en el que se llevará acabo el curso?");
+            System.out.println("¿Cuál es el mes en el que se llevará acabo el curso? (Numero ej. Diciembre = 12)");
             int mes =Integer.parseInt(System.console().readLine());
             System.out.println("¿Cuál es el día en el que se llevará acabo el curso?");
             int dia =Integer.parseInt(System.console().readLine());
@@ -205,5 +225,4 @@ public class Sistema {
         }
 
     }
-    ///////////////////////////////////////////
 }
